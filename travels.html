@@ -2,6 +2,13 @@
     <head>
         <title>Geo Min</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
+            /* Set the size of the div element that contains the map */
+           #map {
+             height: 100%;  /* The height is 400 pixels */
+             width: 100%;  /* The width is the width of the web page */
+            }
+         </style>
     </head>
     <body>
 
@@ -12,13 +19,38 @@
                 </div>
             </div>
             <div class="row">
-                <div class="xl-12 lg-12 md-12 sm-12">
-                    <p>Travels</p>
-                </div>
+            </div>
+            <div class="xl-12 lg-12 md-12 sm-12">
+                <p>Here are the places I've been</p>
+                <div id="map"></div>
+                <script>
+                    // Initialize and add the map
+                    function initMap() {
+                        var uluru = {lat: 37.407592, lng: -76.798927};
+                        // The map, centered at Uluru
+                        var map = new google.maps.Map(
+                            document.getElementById('map'), {zoom: 4, center: uluru, options: {gestureHandling: 'greedy'} });
+                        
+                        var contentString = 'Hello';
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+
+                        var marker = new google.maps.Marker({position: uluru, title: "Hello, World!", map: map});
+
+                        marker.addListener('click', function() {
+                            infowindow.open(map, marker);
+                        });
+                    }
+                </script>
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCmIRRZ0LEhB3h2mj0yu22-35k2yHw1eA&callback=initMap">
+                </script>
             </div>
         </div>
 
         <footer>
+            <br>
             <div class="container">
                 <div class="row">
                     <div class="xl-12 lg-12 md-12" style="margin: auto;">
